@@ -9,6 +9,7 @@ body.dark {
     --bg: #1f2937;
     --card: #374151;
     --text: #f9fafb;
+    --primary: rgb(4, 4, 114);
 }
 
 body {
