@@ -43,6 +43,11 @@ function renderCards(characters) {
         //FAVORITE knop/toggle
         clone.querySelector('.favBtn')
             .addEventListener('click', () => toggleFavorite(char));
+        
+        const isFavorite = state.favorites.some(f => f.id === char.id);
+        if (isFavorite) {
+            clone.querySelector('.card').classList.add('favorited');
+        }
 
         grid.appendChild(clone);
     })
@@ -72,6 +77,7 @@ function toggleFavorite(char) {
     }
 
     localStorage.setItem('favorites', JSON.stringify(state.favorites));
+    renderCards(state.characters);
     renderFavorites();
 }
 

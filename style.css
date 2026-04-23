@@ -91,6 +91,12 @@ body {
     justify-content: space-between;
 }
 
+.card.favorited {
+    background: #ffe4f1; 
+    border: 2px solid #ff4fa3;
+    color: #1f2937;
+}
+
 button {
     cursor: pointer;
     border: none;
