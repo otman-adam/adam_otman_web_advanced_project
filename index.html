@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <h1>API Explorer</h1>
+
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Zoeken...">
+
+        <select id="filterSelect">
+            <option value="">Filter</option>
+            <option value="alive">Alive</option>
+            <option value="dead">Dead</option>
+        </select>
+
+        <select id="sortSelect">
+            <option value="">Sorteren</option>
+            <option value="name-asc">Naam A-Z</option>
+            <option value="name-desc">Naam Z-A</option>
+        </select>
+
+        <button id="themeToggle">🌙</button>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- GRID -->
+    <section class="grid-section">
+        <h2>Personages</h2>
+
+        <div id="cardGrid" class="grid">
+            <!-- JS vult cards -->
+        </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section class="detail-section">
+        <h2>Details</h2>
+        <div id="detailView">
+            <p>Selecteer een personage...</p>
+        </div>
+    </section>
+
+    <!-- FAVORIETEN -->
+    <section class="favorites-section">
+        <h2>Favorieten ⭐</h2>
+        <div id="favoritesList"></div>
+    </section>
+
+</main>
+
+<!-- TEMPLATE -->
+<template id="cardTemplate">
+    <div class="card">
+        <img class="card-img" src="" alt="">
+        <h3 class="card-name"></h3>
+
+        <div class="card-info">
+            <p class="status"></p>
+            <p class="species"></p>
+            <p class="location"></p>
+            <p class="origin"></p>
+            <p class="episodes"></p>
+        </div>
+
+        <div class="card-actions">
+            <button class="detailsBtn">Details</button>
+            <button class="favBtn">⭐</button>
+        </div>
+    </div>
+</template>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

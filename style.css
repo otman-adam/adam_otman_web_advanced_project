@@ -1,0 +1,133 @@
+:root {
+    --bg: #f5f7fa;
+    --primary: #4f46e5;
+    --card: #ffffff;
+    --text: #1f2937;
+}
+
+body.dark {
+    --bg: #1f2937;
+    --card: #374151;
+    --text: #f9fafb;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 1rem;
+    background: var(--primary);
+    color: white;
+    flex-wrap: wrap;
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+    /* height: 30px; */
+}
+
+.controls input,
+.controls select,
+.controls button {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+}
+
+/* LAYOUT */
+.container {
+    padding: 1rem;
+}
+
+/* GRID (BELANGRIJK) */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 👉 6 per rij */
+    gap: 1rem;
+}
+
+/* CARD */
+.card {
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card-name {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.card-info {
+    font-size: 0.8rem;
+}
+
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+}
+
+/* DETAILS */
+.detail-section {
+    margin-top: 2rem;
+}
+
+#detailView {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+/* FAVORIETEN */
+.favorites-section {
+    margin-top: 2rem;
+}
+
+#favoritesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
