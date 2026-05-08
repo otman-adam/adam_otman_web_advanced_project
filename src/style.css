@@ -1,0 +1,245 @@
+:root {
+    --bg: #f5f7fa;
+    --header: #4f46e5;
+    --primary: #4f46e5;
+    --card: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+}
+
+body.dark {
+    --bg: #111827;
+    --header: #1f2937;
+    --primary: #6366f1;
+    --card: #1f2937;
+    --text: #f9fafb;
+    --muted: #9ca3af;
+    --border: #374151;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 1rem;
+    background: var(--header);
+    color: white;
+    flex-wrap: wrap;
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+    /* height: 30px; */
+}
+
+.controls input,
+.controls select,
+.controls button {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    min-width: 120px;
+}
+
+.controls input,
+.controls select {
+    min-width: 160px;
+}
+
+/* LAYOUT */
+.container {
+    padding: 1rem;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 1rem;
+}
+
+#characterTable {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+    background: var(--card);
+    border: 1px solid var(--border);
+}
+
+#characterTable th,
+#characterTable td {
+    text-align: left;
+    padding: 0.75rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+}
+
+#characterTable th {
+    background: rgba(79, 70, 229, 0.08);
+    color: var(--text);
+    position: sticky;
+    top: 0;
+}
+
+.tableFavBtn,
+.note-item button,
+button {
+    cursor: pointer;
+}
+
+.tableFavBtn {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+}
+
+/* GRID (BELANGRIJK) */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 👉 6 per rij */
+    gap: 1rem;
+}
+
+/* CARD */
+.card {
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s ease, opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.card-img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card-name {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.card-info {
+    font-size: 0.8rem;
+}
+
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card.favorited {
+    background: #ffe4f1; 
+    border: 2px solid #ff4fa3;
+    color: #1f2937;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+}
+
+/* DETAILS */
+.detail-section {
+    margin-top: 2rem;
+}
+
+#detailView {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+/* FAVORIETEN */
+.favorites-section {
+    margin-top: 2rem;
+}
+
+#favoritesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.notes-section {
+    margin-top: 2rem;
+}
+
+#noteForm {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+#noteInput {
+    flex: 1;
+    min-width: 220px;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+}
+
+.note-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.note-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text);
+}
+
+.note-item button {
+    border: none;
+    background: transparent;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

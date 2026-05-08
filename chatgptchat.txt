@@ -1,0 +1,1176 @@
+
+kan je mij een html code geven, voor dit api, ik wil enkel de html code, de js code zal ik doen, en als mogelijk maak ook een mooie css om hierbij samen te gaan, hier is mijn opdracht zodat je begrijpt hoe ik die html moet gebruiken: Interactive Single Page Application 
+Opdracht voor Dynamic Web
+Projectoverzicht 
+Voor het vak Advanced Web ga je een interactieve single-page webapplicatie bouwen die gebruik maakt van een API naar keuze. De applicatie moet gebruikers in staat stellen om data te verkennen, te filteren, te sorteren en op te slaan in persoonlijke collecties (favorieten). 
+
+Dit project zal alle vereiste technische aspecten uit het vak Web Advanced integreren in een coherente, nuttige applicatie die echte data gebruikt. Jullie krijgen zo de kans om te werken aan een project met echte waarde en leren tegelijkertijd hoe je de verschillende JavaScript-concepten praktisch kunt toepassen.
+
+Functionele vereisten 
+Jullie applicatie moet de volgende functies bevatten: 
+
+Dataverzameling & -weergave:  
+Haal data op van de API (API endpoint met minstens 20 op te halen objecten)
+Toon de data op een visueel aantrekkelijke manier: lijst/tabel (+ kaart of andere visuele weergave naargelang API)
+Zorg voor duidelijke details van de getoonde items (de lijstweergave toont minstens 6 kolommen)
+Interactiviteit:  
+Filter functionaliteit (op type, locatie, datum, etc.)
+Zoekfunctie
+Sorteermogelijkheden
+Personalisatie:  
+Gebruikers kunnen favoriete locaties/gebeurtenissen opslaan
+Data wordt bewaard tussen sessies
+Gebruikersvoorkeuren opslaan (we hebben tijdens de lessen aantal voorbeelden gezien zoals geolocatie, taalkeuze, themaswitcher, favorieten, gecachte API-data, ...) 
+Gebruikerservaring:  
+Responsive design
+Visueel aantrekkelijke interface
+Gebruiksvriendelijke navigatie 
+Technische vereisten 
+Jullie project moet ALLE onderstaande JavaScript-concepten demonstreren. Per onderdeel moeten jullie in de README documenteren waar en hoe je deze concepten hebt toegepast: 
+
+DOM manipulatie:  
+Elementen selecteren
+Elementen manipuleren
+Events aan elementen koppelen
+Modern JavaScript:  
+Gebruik van constanten
+Template literals
+Iteratie over arrays
+Array methodes
+Arrow functions
+Conditional (ternary) operator (moderne if..else)
+Callback functions
+Promises
+Async & Await
+Observer API (1 is voldoende)
+Data & API:  
+Fetch om data op te halen
+JSON manipuleren en weergeven
+Opslag & validatie:  
+Formulier validatie
+Gebruik van LocalStorage 
+Styling & layout:  
+Basis HTML layout (flexbox of CSS grid kan hiervoor worden gebruikt)
+Basis CSS
+Gebruiksvriendelijke elementen (verwijderknoppen, icoontjes,...)
+Tooling & structuur: 
+Project is opgezet met Vite 
+Een correcte folderstructuur wordt aangehouden (gescheiden html, css en js files, src folder, dist folder, ...)
+API Keuze 
+Jullie kunnen kiezen uit diverse gratis datasets op het net, zoals: 
+
+Brussel APILinks to an external site.
+The Movie Database APILinks to an external site.
+Links to an external site.Pokemon APILinks to an external site. 
+Rick and Morty APILinks to an external site. 
+Food APILinks to an external site. 
+...
+De keuze van dataset(s) is vrij, zolang jullie er een interessante gebruikerservaring mee kunnen creëren. Laat je gerust inspireren naar je persoonlijke interesses en zoek naar een goede API.
+
+Deliverables 
+GitHub Repository met:  
+Complete broncode met comments en bronvermelding
+Uitgebreide README met:  
+Projectbeschrijving en functionaliteiten
+Gebruikte API's met links
+Implementatie van elke technisch vereiste (waar in de code?/lijnnummer)
+Installatiehandleiding
+Screenshots van de applicatie
+Gebruikte bronnen (inclusief AI chatlog)
+Een Github Repository wil zeggen dat meerdere commits gedaan worden naar aanleiding van het finale project. Per onderdeel én dagelijks. 
+Werkende Demo: 
+Code moet uitvoerbaar zijn aan de hand van de installatiehandleiding
+Evaluatiecriteria 
+Jullie project wordt beoordeeld op: 
+
+Functionaliteit: Werkt alles zoals verwacht?
+Code kwaliteit: Is de code leesbaar, goed georganiseerd en efficiënt?
+Technische vereisten: Zijn alle vereiste concepten correct geïmplementeerd?
+Gebruikerservaring: Is de interface intuïtief en aantrekkelijk?
+Structuur: Zijn er meerdere commits gedaan in de Github repository? Is de folderstructuur netjes?
+Tips voor een geslaagd project 
+Begin met het verkennen van de API en bepaal welke dataset(s) jullie willen gebruiken 
+Maak een plan: schets de interface en maak een lijst van benodigde functionaliteiten 
+Begin eenvoudig en voeg geleidelijk meer complexiteit toe 
+Commit regelmatig naar GitHub en gebruik betekenisvolle commit-berichten 
+Vraag tijdig feedback aan je docent 
+Test je applicatie op verschillende apparaten en browsers 
+
+Hier is een volledige HTML + CSS structuur die perfect aansluit bij je opdracht (SPA, filtering, favorieten, lijstweergave met ≥6 kolommen, responsive, etc.).
+De JavaScript kun jij hier later eenvoudig aan koppelen.
+
+✅ HTML (index.html)
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1>API Explorer</h1>
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Zoeken...">
+
+            <select id="filterSelect">
+                <option value="">Filter</option>
+                <option value="type1">Type 1</option>
+                <option value="type2">Type 2</option>
+            </select>
+
+            <select id="sortSelect">
+                <option value="">Sorteren</option>
+                <option value="name-asc">Naam A-Z</option>
+                <option value="name-desc">Naam Z-A</option>
+            </select>
+
+            <button id="themeToggle">🌙</button>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <!-- DATA LIJST -->
+        <section class="data-section">
+            <h2>Resultaten</h2>
+
+            <div class="table-container">
+                <table id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Type</th>
+                            <th>Locatie</th>
+                            <th>Datum</th>
+                            <th>Status</th>
+                            <th>Score</th>
+                            <th>Acties</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- JS vult dit -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- DETAILS -->
+        <section class="detail-section">
+            <h2>Details</h2>
+            <div id="detailView">
+                <p>Selecteer een item...</p>
+            </div>
+        </section>
+
+        <!-- FAVORIETEN -->
+        <section class="favorites-section">
+            <h2>Favorieten ⭐</h2>
+            <div id="favoritesList">
+                <!-- JS vult dit -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- TEMPLATE (handig voor JS rendering) -->
+    <template id="rowTemplate">
+        <tr>
+            <td class="name"></td>
+            <td class="type"></td>
+            <td class="location"></td>
+            <td class="date"></td>
+            <td class="status"></td>
+            <td class="score"></td>
+            <td>
+                <button class="detailsBtn">🔍</button>
+                <button class="favBtn">⭐</button>
+            </td>
+        </tr>
+    </template>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+🎨 CSS (style.css)
+:root {
+    --bg: #f5f7fa;
+    --primary: #4f46e5;
+    --text: #1f2937;
+    --card: #ffffff;
+}
+
+body.dark {
+    --bg: #1f2937;
+    --text: #f9fafb;
+    --card: #374151;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--primary);
+    color: white;
+    flex-wrap: wrap;
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.controls input,
+.controls select,
+.controls button {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+}
+
+/* LAYOUT */
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.data-section {
+    grid-column: 1 / 2;
+}
+
+.detail-section {
+    grid-column: 2 / 3;
+}
+
+.favorites-section {
+    grid-column: 1 / -1;
+}
+
+/* TABLE */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+}
+
+th {
+    background: var(--primary);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: rgba(0,0,0,0.05);
+}
+
+button {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* DETAILS */
+#detailView {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+/* FAVORIETEN */
+#favoritesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.favorite-item {
+    background: var(--card);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-section {
+        grid-column: 1;
+    }
+}
+🔥 Waarom dit goed is voor je opdracht
+Dit design dekt praktisch alle vereisten:
+
+✅ Tabel met 6+ kolommen
+
+✅ Zoek + filter + sort UI
+
+✅ Detail view
+
+✅ Favorieten sectie
+
+✅ Template voor DOM manipulatie
+
+✅ Responsive layout (grid + media queries)
+
+✅ Theme switch (klaar voor JS)
+
+✅ Perfect voor LocalStorage + API data
+
+💡 Kleine tip (belangrijk)
+Zorg dat je JS straks:
+
+#tableBody vult met API data
+
+#favoritesList synchroniseert met LocalStorage
+
+#detailView update bij klik
+
+filters combineert (search + filter + sort)
+
+Als je wil, kan ik ook:
+
+een JS structuur (Vite-ready) geven
+
+of een API aanbevelen + datamodel aanpassen aan deze HTML
+
+Dat zou je project echt naar een hoger niveau tillen.
+
+
+het moet meer als een grid zijn, en niet zoals een echte tabel, het moet wel 6 personages per lijn tonen
+
+Ah, duidelijk — een klassieke tabel gaat je hier net tegenwerken. Je wil een card-based grid layout (zoals Netflix / Pokémon / Rick & Morty), met 6 items per rij. Dat is perfect voor UX én je opdracht.
+
+Hier is een aangepaste versie 👇
+
+✅ HTML (grid-based layout)
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <h1>API Explorer</h1>
+
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Zoeken...">
+
+        <select id="filterSelect">
+            <option value="">Filter</option>
+            <option value="alive">Alive</option>
+            <option value="dead">Dead</option>
+        </select>
+
+        <select id="sortSelect">
+            <option value="">Sorteren</option>
+            <option value="name-asc">Naam A-Z</option>
+            <option value="name-desc">Naam Z-A</option>
+        </select>
+
+        <button id="themeToggle">🌙</button>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- GRID -->
+    <section class="grid-section">
+        <h2>Personages</h2>
+
+        <div id="cardGrid" class="grid">
+            <!-- JS vult cards -->
+        </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section class="detail-section">
+        <h2>Details</h2>
+        <div id="detailView">
+            <p>Selecteer een personage...</p>
+        </div>
+    </section>
+
+    <!-- FAVORIETEN -->
+    <section class="favorites-section">
+        <h2>Favorieten ⭐</h2>
+        <div id="favoritesList"></div>
+    </section>
+
+</main>
+
+<!-- TEMPLATE -->
+<template id="cardTemplate">
+    <div class="card">
+        <img class="card-img" src="" alt="">
+        <h3 class="card-name"></h3>
+
+        <div class="card-info">
+            <p class="status"></p>
+            <p class="species"></p>
+            <p class="location"></p>
+            <p class="origin"></p>
+            <p class="episodes"></p>
+        </div>
+
+        <div class="card-actions">
+            <button class="detailsBtn">Details</button>
+            <button class="favBtn">⭐</button>
+        </div>
+    </div>
+</template>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
+🎨 CSS (6 per rij grid)
+:root {
+    --bg: #f5f7fa;
+    --primary: #4f46e5;
+    --card: #ffffff;
+    --text: #1f2937;
+}
+
+body.dark {
+    --bg: #1f2937;
+    --card: #374151;
+    --text: #f9fafb;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: var(--primary);
+    color: white;
+    flex-wrap: wrap;
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.controls input,
+.controls select,
+.controls button {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+}
+
+/* LAYOUT */
+.container {
+    padding: 1rem;
+}
+
+/* GRID (BELANGRIJK) */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 👉 6 per rij */
+    gap: 1rem;
+}
+
+/* CARD */
+.card {
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card-name {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.card-info {
+    font-size: 0.8rem;
+}
+
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+}
+
+/* DETAILS */
+.detail-section {
+    margin-top: 2rem;
+}
+
+#detailView {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+/* FAVORIETEN */
+.favorites-section {
+    margin-top: 2rem;
+}
+
+#favoritesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+🔥 Wat je hiermee bereikt
+✅ Exact 6 cards per rij (desktop)
+
+✅ Moderne UI (veel beter dan tabel)
+
+✅ Perfect voor API zoals:
+
+Rick & Morty
+
+Pokémon
+
+Movies
+
+✅ Klaar voor:
+
+filteren
+
+zoeken
+
+sorteren
+
+favorieten (⭐ knop)
+
+✅ Responsive (4 → 2 kolommen automatisch)
+
+💡 Belangrijke tip (voor punten)
+Je docent verwacht “6 kolommen” →
+👉 Dit telt ook als je 6 datavelden per card toont (wat je nu doet):
+
+status
+
+species
+
+location
+
+origin
+
+episodes
+
+naam
+
+Dus je voldoet nog steeds aan die eis ✔️
+
+Als je wil, kan ik je volgende stap geven:
+👉 een perfecte JS structuur (met fetch + filtering + localStorage + favorieten) die hier direct op past.
+
+
+ik heb hulp nodig om mijn readme op te bouwen kan je mij wat ideeen geven om daaraan te werken? hier is wat ik tot nu toe heb: <!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+
+<header class="header">
+    <h1>API Explorer</h1>
+
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Zoeken...">
+
+        <select id="filterSelect">
+            <option value="">Filter</option>
+            <option value="alive">Alive</option>
+            <option value="dead">Dead</option>
+        </select>
+
+        <select id="sortSelect">
+            <option value="">Sorteren</option>
+            <option value="name-asc">Naam A-Z</option>
+            <option value="name-desc">Naam Z-A</option>
+        </select>
+
+        <button id="themeToggle">🌙</button>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- GRID -->
+    <section class="grid-section">
+        <h2>Personages</h2>
+
+        <div id="cardGrid" class="grid">
+            <!-- JS vult cards -->
+        </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section class="detail-section">
+        <h2>Details</h2>
+        <div id="detailView">
+            <p>Selecteer een personage...</p>
+        </div>
+    </section>
+
+    <!-- FAVORIETEN -->
+    <section class="favorites-section">
+        <h2>Favorieten ⭐</h2>
+        <div id="favoritesList"></div>
+    </section>
+
+</main>
+
+<!-- TEMPLATE -->
+<template id="cardTemplate">
+    <div class="card">
+        <img class="card-img" src="" alt="">
+        <h3 class="card-name"></h3>
+
+        <div class="card-info">
+            <p class="status"></p>
+            <p class="species"></p>
+            <p class="location"></p>
+            <p class="origin"></p>
+            <p class="episodes"></p>
+        </div>
+
+        <div class="card-actions">
+            <button class="detailsBtn">Details</button>
+            <button class="favBtn">⭐</button>
+        </div>
+    </div>
+</template>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html> ; :root {
+    --bg: #f5f7fa;
+    --primary: #4f46e5;
+    --card: #ffffff;
+    --text: #1f2937;
+}
+
+body.dark {
+    --bg: #1f2937;
+    --card: #374151;
+    --text: #f9fafb;
+    --primary: rgb(4, 4, 114);
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 1rem;
+    background: var(--primary);
+    color: white;
+    flex-wrap: wrap;
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+    /* height: 30px; */
+}
+
+.controls input,
+.controls select,
+.controls button {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+}
+
+/* LAYOUT */
+.container {
+    padding: 1rem;
+}
+
+/* GRID (BELANGRIJK) */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 👉 6 per rij */
+    gap: 1rem;
+}
+
+/* CARD */
+.card {
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card-name {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.card-info {
+    font-size: 0.8rem;
+}
+
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card.favorited {
+    background: #ffe4f1; 
+    border: 2px solid #ff4fa3;
+    color: #1f2937;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+}
+
+/* DETAILS */
+.detail-section {
+    margin-top: 2rem;
+}
+
+#detailView {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+/* FAVORIETEN */
+.favorites-section {
+    margin-top: 2rem;
+}
+
+#favoritesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+} ; const API_URL = 'https://rickandmortyapi.com/api/character';
+
+const state = {
+    characters: [],
+    favorites: JSON.parse(localStorage.getItem('favorites')) || []
+};
+
+//FETCH functie
+async function fetchCharacters() {
+    try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+            throw new Error(HTTP fout: ${response.status});
+        } 
+
+        const data = await response.json();
+        state.characters = data.results;
+
+        renderCards(state.characters);
+    } catch (error) {
+        console.error('Fout bij ophalen: ', error);
+    }
+}
+
+//RENDER functie
+function renderCards(characters) {
+    const grid = document.getElementById('cardGrid');
+    grid.innerHTML = "";
+
+    characters.forEach(char => {
+        const template = document.getElementById('cardTemplate');
+        const clone = template.content.cloneNode(true);
+        
+        clone.querySelector('.card-img').src = char.image;
+        clone.querySelector('.card-name').textContent = char.name;
+        clone.querySelector('.status').textContent = char.status;
+        clone.querySelector('.species').textContent = char.species;
+
+        //DETAIL knop
+        clone.querySelector('.detailsBtn')
+            .addEventListener('click', () => showDetails(char));
+
+        //FAVORITE knop/toggle
+        clone.querySelector('.favBtn')
+            .addEventListener('click', () => toggleFavorite(char));
+        
+        const isFavorite = state.favorites.some(f => f.id === char.id);
+        if (isFavorite) {
+            clone.querySelector('.card').classList.add('favorited');
+        }
+
+        grid.appendChild(clone);
+    })
+}
+
+//DETAILS functie
+function showDetails(char) {
+    const detail = document.getElementById("detailView");
+
+    detail.innerHTML = 
+    <h3>${char.name}</h3>
+    <img src="${char.image}" width="150">
+    <p>Status: ${char.status}</p>
+    <p>Soort: ${char.species}</p>
+    <p>Locatie: ${char.location.name}</p>
+    ;
+}
+
+//FAVORITE functie
+function toggleFavorite(char) {
+    const exists = state.favorites.find(f => f.id === char.id);
+
+    if (exists) {
+        state.favorites = state.favorites.filter(f => f.id !== char.id);
+    } else {
+        state.favorites.push(char);
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(state.favorites));
+    renderCards(state.characters);
+    renderFavorites();
+}
+
+function renderFavorites() {
+    const container = document.getElementById('favoritesList');
+    container.innerHTML = "";
+
+    state.favorites.forEach(char => {
+        const template = document.getElementById('cardTemplate');
+        const clone = template.content.cloneNode(true);
+
+        clone.querySelector('.card-img').src = char.image;
+        clone.querySelector('.card-name').textContent = char.name;
+        clone.querySelector('.status').textContent = char.status;
+        clone.querySelector('.species').textContent = char.species;
+
+        clone.querySelector('.detailsBtn')
+            .addEventListener('click', () => showDetails(char));
+
+        clone.querySelector('.favBtn')
+            .addEventListener('click', () => toggleFavorite(char));
+
+        container.appendChild(clone);
+    });
+}
+
+//FILTER, SEARCH, SORT
+function applyFilters() {
+    const searchValue = document.getElementById('searchInput').value.toLowerCase();
+    const filterValue = document.getElementById('filterSelect').value;
+    const sortValue = document.getElementById('sortSelect').value;
+
+    let result = [...state.characters];
+
+    //SEARCH
+    if (searchValue) {
+        result = result.filter(c => c.name.toLowerCase().includes(searchValue));
+    }
+
+    //FILTER
+    if (filterValue) {
+        result = result.filter(c => c.status.toLowerCase() === filterValue);
+    }
+
+    //SORT
+    if (sortValue === 'name-asc') {
+        result.sort((a, b ) => a.name.localeCompare(b.name));
+    }
+    if (sortValue === 'name-desc') {
+        result.sort((a, b) => b.name.localeCompare(a.name));
+    }
+
+    renderCards(result)
+}
+
+//EVENTS
+document.getElementById('searchInput')
+    .addEventListener('input', applyFilters);
+
+document.getElementById('filterSelect')
+    .addEventListener('change', applyFilters);
+
+document.getElementById('sortSelect')
+    .addEventListener('change', applyFilters);
+
+document.getElementById('themeToggle')
+    .addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+    });
+
+//INIT
+function init() {
+    fetchCharacters();
+    renderFavorites();
+}
+
+init(); ; ik hoef geen fixes voor mijn js of html of css, ik wil enkel hulp voor mijn readme
+
+Top — je hebt al een solide project, dus je README moet vooral je verhaal + structuur + bewijslast van requirements duidelijk maken. Denk eraan: je README is wat je docent “leest om punten te geven”, niet je code zelf.
+
+Hier is een sterke structuur + concrete invulling ideeën speciaal op basis van jouw project (Rick & Morty API grid app).
+
+🧠 1. README structuur (aanrader)
+Gebruik deze opbouw:
+
+# API Explorer - Rick & Morty SPA
+
+## 1. Projectbeschrijving
+## 2. Gebruikte API
+## 3. Functionaliteiten
+## 4. Technische vereisten
+## 5. Installatie
+## 6. Projectstructuur
+## 7. Screenshots
+## 8. Gebruikte bronnen
+## 9. AI / Chatlog
+✍️ 2. Wat je kan schrijven (kant-en-klare ideeën)
+1. Projectbeschrijving
+👉 Hier leg je uit wat je app doet
+
+Voorbeeld:
+
+Deze applicatie is een single-page webapplicatie die gebruik maakt van de Rick and Morty API.
+Gebruikers kunnen personages bekijken in een grid, zoeken, filteren op status, sorteren op naam en favoriete personages opslaan.
+De applicatie is volledig dynamisch en werkt zonder herladen van de pagina.
+
+2. Gebruikte API
+👉 altijd verplicht
+
+Voorbeeld:
+
+API: https://rickandmortyapi.com
+Endpoint: https://rickandmortyapi.com/api/character
+De API levert data over personages zoals naam, status, soort, locatie en afbeelding.
+
+3. Functionaliteiten
+👉 dit is waar je veel punten haalt
+
+Schrijf het in “user features” stijl:
+
+🔍 Zoekfunctie op naam van personages
+
+🎯 Filter op status (Alive / Dead)
+
+↕️ Sorteren op naam (A-Z / Z-A)
+
+⭐ Favorieten opslaan in LocalStorage
+
+🧠 Detailweergave per personage
+
+🖼️ Grid layout met cards (6 per rij op desktop)
+
+🌙 Dark mode toggle
+
+💾 Data blijft bewaard tussen sessies
+
+4. Technische vereisten (BELANGRIJKSTE SECTIE)
+Hier moet je tonen dat je “de opdracht snapt”.
+
+Je kan dit zo schrijven:
+
+DOM manipulatie
+De DOM wordt gemanipuleerd via document.getElementById, querySelector en innerHTML om cards dynamisch te renderen en details te tonen.
+
+Fetch + API
+Data wordt opgehaald met fetch() van de Rick and Morty API. De response wordt omgezet naar JSON en opgeslagen in een state object.
+
+Async / Await
+De API call wordt uitgevoerd met async/await in de functie fetchCharacters().
+
+Array methods
+De applicatie gebruikt .map(), .filter(), .sort() en .forEach() voor filtering, zoeken en renderen.
+
+LocalStorage
+Favorieten worden opgeslagen in localStorage zodat ze bewaard blijven tussen sessies.
+
+Events
+Interactiviteit wordt toegevoegd via event listeners op zoekvelden, filters, sortering en knoppen.
+
+Template literals
+HTML cards worden dynamisch gegenereerd met template literals en cloning van <template>.
+
+Observer API (als je dat nog toevoegt)
+👉 idee:
+
+(optioneel) Observer API kan gebruikt worden om lazy loading of infinite scroll te implementeren.
+
+5. Installatie
+👉 heel belangrijk voor punten
+
+Voorbeeld:
+
+1. Clone de repository
+2. Open project in VS Code
+3. Start met Live Server of Vite
+4. Open index.html in browser
+6. Projectstructuur
+Zet iets als:
+
+/project
+│
+├── index.html
+├── style.css
+├── main.js
+└── /assets
+(of als je Vite gebruikt:)
+
+/src
+  ├── main.js
+  ├── style.css
+index.html
+7. Screenshots
+👉 docent verwacht dit vaak
+
+Voeg toe:
+
+grid view
+
+detail view
+
+favorites
+
+dark mode
+
+8. Bronnen
+- https://rickandmortyapi.com
+- MDN Web Docs
+- StackOverflow (indien gebruikt)
+9. AI / Chatlog
+👉 verplicht bij veel scholen
+
+Je kan letterlijk schrijven:
+
+ChatGPT is gebruikt voor hulp bij het structureren van de README en het genereren van ideeën voor UI en functionaliteit.
+
+💡 Extra tip (belangrijk voor punten)
+Je README moet niet “kort” zijn — maar:
+
+duidelijk
+
+gestructureerd
+
+bewijs dat je requirements begrijpt
+
+🚀 Als je nog een stap hoger wil gaan
+Ik kan je ook helpen met:
+
+een perfecte README template (copy-paste klaar in Markdown)
+
+of een README die exact mapped is op je code (met je functies erbij)
+
+of zelfs een GitHub “A+ README” versie die docent-proof is
+
+Zeg gewoon 👍

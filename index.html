@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Explorer</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
 
@@ -33,6 +32,28 @@
 
 <main class="container">
 
+    <!-- TABLE -->
+    <section class="table-section">
+        <h2>Personages Overzicht</h2>
+        <div class="table-wrapper">
+            <table id="characterTable">
+                <thead>
+                    <tr>
+                        <th>Naam</th>
+                        <th>Status</th>
+                        <th>Soort</th>
+                        <th>Geslacht</th>
+                        <th>Origin</th>
+                        <th>Locatie</th>
+                        <th>Episodes</th>
+                        <th>Favoriet</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
     <!-- GRID -->
     <section class="grid-section">
         <h2>Personages</h2>
@@ -56,6 +77,15 @@
         <div id="favoritesList"></div>
     </section>
 
+    <!-- NOTITIES -->
+    <section class="notes-section">
+        <h2>Persoonlijke notities</h2>
+        <form id="noteForm">
+            <input type="text" id="noteInput" placeholder="Schrijf een korte notitie..." required minlength="3">
+            <button type="submit">Opslaan</button>
+        </form>
+        <div id="noteList" class="note-list"></div>
+    </section>
 </main>
 
 <!-- TEMPLATE -->
