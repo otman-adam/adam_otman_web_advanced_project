@@ -102,7 +102,7 @@ button {
     font-size: 1rem;
 }
 
-/* GRID (BELANGRIJK) */
+/* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* 👉 6 per rij */
@@ -229,6 +229,21 @@ button {
     background: transparent;
     color: var(--primary);
     font-size: 1.1rem;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    text-align: center;
+    background: var(--header);
+    color: white;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+}
+
+.footer p {
+    margin: 0;
 }
 
 /* RESPONSIVE */
