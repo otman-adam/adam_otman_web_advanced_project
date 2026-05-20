@@ -169,6 +169,21 @@ button {
     border-radius: 5px;
 }
 
+/* Dark theme: maak details- en favoriete-knoppen donkerder voor betere contrast */
+body.dark .detailsBtn,
+body.dark .favBtn,
+body.dark .tableFavBtn {
+    background: #111827;
+    color: var(--text);
+    border: 1px solid #374151;
+}
+
+body.dark .detailsBtn:hover,
+body.dark .favBtn:hover,
+body.dark .tableFavBtn:hover {
+    filter: brightness(0.95);
+}
+
 /* DETAILS */
 .detail-section {
     margin-top: 2rem;
