@@ -131,6 +131,11 @@ button {
     transform: translateY(0) scale(1);
 }
 
+/* Ensure hover still applies when the "visible" class is present (specificity/order)
+   Keep translateY(0) so the card doesn't jump when hovering. */
+.card.visible:hover {
+    transform: translateY(0) scale(1.03);
+}
 .card-img {
     width: 100%;
     border-radius: 8px;

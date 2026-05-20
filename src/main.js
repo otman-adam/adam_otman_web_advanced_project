@@ -243,6 +243,8 @@ function renderFavorites() {
             .addEventListener('click', () => toggleFavorite(char));
 
         clone.querySelector('.card').classList.add('favorited');
+        // Make favorite cards visible immediately (they are not observed by IntersectionObserver)
+        clone.querySelector('.card').classList.add('visible');
         container.appendChild(clone);
     });
 }
